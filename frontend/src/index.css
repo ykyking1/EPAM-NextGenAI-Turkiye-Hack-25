@@ -1,0 +1,524 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #1e1b4b 0%, #1e3a8a 25%, #312e81 50%, #1e40af 75%, #3730a3 100%);
+        min-height: 100vh;
+        color: #f8fafc;
+        overflow-x: hidden;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(30, 27, 75, 0.3);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #3730a3, #1e40af);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #4338ca, #2563eb);
+    }
+}
+
+@layer components {
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .neon-glow {
+        box-shadow:
+                0 0 20px rgba(59, 130, 246, 0.3),
+                0 0 40px rgba(99, 102, 241, 0.2),
+                0 0 60px rgba(139, 92, 246, 0.1);
+    }
+
+    /* Help Desk Specific Styles */
+    .help-desk-glow {
+        box-shadow:
+                0 0 20px rgba(245, 158, 11, 0.4),
+                0 0 40px rgba(251, 191, 36, 0.3),
+                0 0 60px rgba(252, 211, 77, 0.2);
+    }
+
+    .help-pulse {
+        animation: helpPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes helpPulse {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+    }
+
+    .pulse-animation {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #6366f1, #3b82f6, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .animated-border {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .animated-border::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
+        animation: slide 2s infinite;
+    }
+
+    @keyframes slide {
+        0% { left: -100%; }
+        100% { left: 100%; }
+    }
+
+    .floating {
+        animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* Opening Animation */
+    .page-enter {
+        animation: pageEnter 1.5s ease-out forwards;
+    }
+
+    .logo-animate {
+        animation: logoEnter 2s ease-out forwards;
+    }
+
+    .content-animate {
+        animation: contentSlideUp 1.8s ease-out 0.5s forwards;
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    .feature-animate {
+        animation: featureSlideIn 1.5s ease-out forwards;
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    .feature-animate:nth-child(2) {
+        animation-delay: 0.8s;
+    }
+
+    .feature-animate:nth-child(3) {
+        animation-delay: 1.2s;
+    }
+
+    @keyframes pageEnter {
+        0% {
+            opacity: 0;
+            background-position: 0% 50%;
+        }
+        100% {
+            opacity: 1;
+            background-position: 100% 50%;
+        }
+    }
+
+    @keyframes logoEnter {
+        0% {
+            opacity: 0;
+            transform: scale(0.5) rotate(-180deg);
+            filter: blur(10px);
+        }
+        60% {
+            transform: scale(1.1) rotate(0deg);
+            filter: blur(0px);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            filter: blur(0px);
+        }
+    }
+
+    @keyframes contentSlideUp {
+        0% {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes featureSlideIn {
+        0% {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .btn-primary {
+        @apply px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-out;
+    }
+
+    .btn-secondary {
+        @apply px-4 py-2 bg-gradient-to-r from-indigo-700/30 to-blue-700/30 backdrop-blur-sm border border-indigo-400/30 text-indigo-100 font-medium rounded-lg hover:bg-gradient-to-r hover:from-indigo-600/40 hover:to-blue-600/40 transition-all duration-300;
+    }
+
+    .btn-help {
+        @apply px-4 py-2 bg-gradient-to-r from-amber-600/80 to-orange-600/80 backdrop-blur-sm border border-amber-400/30 text-white font-medium rounded-lg hover:bg-gradient-to-r hover:from-amber-500 hover:to-orange-500 transition-all duration-300 shadow-lg hover:shadow-xl;
+    }
+
+    .input-field {
+        @apply w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-indigo-400/30 rounded-xl text-white placeholder-indigo-200/60 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all duration-300;
+    }
+
+    .card {
+        @apply glass-effect rounded-2xl p-6 transform hover:scale-105 transition-all duration-300;
+    }
+
+    .message-bubble {
+        @apply max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-lg backdrop-blur-sm;
+    }
+
+    .message-user {
+        @apply message-bubble bg-gradient-to-r from-indigo-600 to-blue-600 text-white ml-auto;
+    }
+
+    .message-bot {
+        @apply message-bubble bg-white/10 border border-indigo-400/30 text-indigo-100 mr-auto;
+    }
+
+    /* Help Desk Overlay Animation */
+    .help-overlay-enter {
+        animation: helpOverlayEnter 0.3s ease-out forwards;
+    }
+
+    .help-overlay-exit {
+        animation: helpOverlayExit 0.3s ease-in forwards;
+    }
+
+    @keyframes helpOverlayEnter {
+        0% {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes helpOverlayExit {
+        0% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+    }
+
+    /* Help Desk Chat Bubbles */
+    .help-message-enter {
+        animation: helpMessageEnter 0.5s ease-out forwards;
+    }
+
+    @keyframes helpMessageEnter {
+        0% {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    /* Help Button Bounce Effect */
+    .help-button-bounce {
+        animation: helpButtonBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes helpButtonBounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-10px);
+        }
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+}
+
+/* Particle Animation */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(135deg, #6366f1, #3b82f6);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+.particle:nth-child(odd) {
+    animation-delay: -2s;
+}
+
+.particle:nth-child(3n) {
+    animation-delay: -4s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-100px) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* Loading Animation */
+.loading-dots {
+    display: inline-block;
+}
+
+.loading-dots::after {
+    content: '';
+    animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+}
+
+/* Help Desk Specific Animations */
+.help-desk-fade-in {
+    animation: helpDeskFadeIn 0.4s ease-out forwards;
+}
+
+@keyframes helpDeskFadeIn {
+    0% {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    100% {
+        opacity: 1;
+        backdrop-filter: blur(8px);
+    }
+}
+
+.help-desk-slide-up {
+    animation: helpDeskSlideUp 0.4s ease-out forwards;
+}
+
+@keyframes helpDeskSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Quick Action Buttons */
+.quick-action-btn {
+    @apply px-3 py-2 bg-white/10 border border-indigo-400/30 rounded-lg text-indigo-200 hover:bg-indigo-500/20 hover:text-white transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        @apply p-4;
+    }
+
+    .btn-primary {
+        @apply px-4 py-2 text-sm;
+    }
+
+    .help-desk-interface {
+        @apply h-full rounded-none;
+    }
+}
+
+/* Modern Notification System CSS */
+@keyframes progressBar {
+    0% {
+        width: 100%;
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        width: 0%;
+        opacity: 0.3;
+    }
+}
+
+/* Enhanced Glass Effect for Notifications */
+.notification-glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Success Notification Glow */
+.notification-success {
+    box-shadow:
+            0 0 20px rgba(34, 197, 94, 0.3),
+            0 8px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.5);
+}
+
+/* Error Notification Glow */
+.notification-error {
+    box-shadow:
+            0 0 20px rgba(239, 68, 68, 0.3),
+            0 8px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+/* Info Notification Glow */
+.notification-info {
+    box-shadow:
+            0 0 20px rgba(59, 130, 246, 0.3),
+            0 8px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.5);
+}
+
+/* Warning Notification Glow */
+.notification-warning {
+    box-shadow:
+            0 0 20px rgba(245, 158, 11, 0.3),
+            0 8px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(245, 158, 11, 0.5);
+}
+
+/* Mobile responsive improvements */
+@media (max-width: 640px) {
+    .notification-container {
+        top: 0.5rem;
+        right: 0.5rem;
+        left: 0.5rem;
+    }
+
+    .notification-toast {
+        min-width: auto;
+        max-width: none;
+    }
+
+    .help-desk-interface {
+        margin: 0;
+        height: 100vh;
+        border-radius: 0;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .notification-toast {
+        border-width: 2px;
+        font-weight: 600;
+    }
+
+    .help-desk-interface {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .notification-toast,
+    .help-overlay-enter,
+    .help-message-enter,
+    .help-button-bounce,
+    .floating,
+    .pulse-animation {
+        animation: none;
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .card:hover {
+        transform: none;
+    }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+    .notification-toast {
+        backdrop-filter: blur(24px);
+    }
+
+    .notification-glass {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
